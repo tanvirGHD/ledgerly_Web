@@ -7,6 +7,19 @@ const Category = require("../models/Category");
 const requireAuth = require("../middleware/auth");
 
 const router = express.Router();
+const normalizeUrl = (url) => url.trim().replace(/\/+$/, "");
+const CLIENT_URL = normalizeUrl(
+  process.env.CLIENT_URL ||
+    (process.env.NODE_ENV === "production"
+      ? "https://leafy-meerkat-603428.netlify.app"
+      : "http://localhost:5173")
+);
+const API_URL = normalizeUrl(
+  process.env.API_URL ||
+    (process.env.NODE_ENV === "production"
+      ? "https://ledgerly-web-nine.vercel.app"
+      : "http://localhost:5000")
+);
 
 const DEFAULT_CATEGORIES = [
   { name: "Food", type: "expense" },
@@ -28,9 +41,9 @@ function signToken(user) {
 
 router.get("/google", (req, res) => {
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-    return res.redirect(`${process.env.CLIENT_URL || "http://localhost:5173"}/auth?oauth=unavailable`);
+    return res.redirect(`${CLIENT_URL}/auth?oauth=unavailable`);
   }
-  const redirectUri = process.env.GOOGLE_REDIRECT_URI || `${process.env.API_URL || "http://localhost:5000"}/api/auth/google/callback`;
+  const redirectUri = process.env.GOOGLE_REDIRECT_URI || `${API_URL}/api/auth/google/callback`;
   const params = new URLSearchParams({
     client_id: process.env.GOOGLE_CLIENT_ID,
     redirect_uri: redirectUri,
@@ -44,9 +57,9 @@ router.get("/google", (req, res) => {
 
 router.get("/google/callback", async (req, res, next) => {
   try {
-    const redirectBase = process.env.CLIENT_URL || "http://localhost:5173";
+    const redirectBase = CLIENT_URL;
     if (!req.query.code) return res.redirect(`${redirectBase}/auth?oauth=failed`);
-    const redirectUri = process.env.GOOGLE_REDIRECT_URI || `${process.env.API_URL || "http://localhost:5000"}/api/auth/google/callback`;
+    const redirectUri = process.env.GOOGLE_REDIRECT_URI || `${API_URL}/api/auth/google/callback`;
     const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },

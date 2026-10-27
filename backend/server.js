@@ -12,7 +12,16 @@ const reportRoutes = require("./routes/reports");
 
 const app = express();
 
-app.use(cors({ origin: process.env.CLIENT_URL || "*" }));
+const allowedOrigins = [
+  "https://leafy-meerkat-603428.netlify.app",
+  "http://localhost:5173",
+  ...(process.env.CLIENT_URL || "")
+    .split(",")
+    .map((origin) => origin.trim().replace(/\/+$/, ""))
+    .filter(Boolean),
+];
+
+app.use(cors({ origin: [...new Set(allowedOrigins)] }));
 app.use(express.json());
 
 app.get("/api/health", (req, res) => res.json({ ok: true, service: "ledgerly-api" }));
