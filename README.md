@@ -1,4 +1,4 @@
-# Ledgerly — production-ready personal finance app
+# Ledgerly — production-ready personal finance website
 
 Ledgerly is a modern personal finance dashboard built with React, Vite, Express, and MongoDB. The app is designed to help users manage salary, expenses, budgets, savings goals, and monthly reporting in a clean, trustworthy interface.
 
