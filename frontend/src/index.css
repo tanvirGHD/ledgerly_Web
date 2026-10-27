@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  color-scheme: dark;
+  --ink-950: 11 15 14;
+  --ink-900: 18 26 22;
+  --ink-800: 28 41 35;
+  --ink-700: 46 63 54;
+  --ink-600: 82 101 92;
+  --paper-100: 245 247 244;
+  --paper-200: 232 239 234;
+  --paper-400: 173 188 180;
+  --paper-600: 121 141 132;
+  --gold-400: 111 232 180;
+  --gold-500: 52 211 153;
+  --gold-600: 18 166 100;
+  --sage-400: 138 234 198;
+  --sage-500: 108 201 164;
+  --sage-600: 70 172 130;
+  --brick-400: 255 170 152;
+  --brick-500: 246 126 102;
+  --brick-600: 208 90 69;
+  --chart-axis: 164 180 170;
+  --chart-grid: 82 101 92;
+  --chart-income: 24 168 117;
+  --chart-expense: 217 101 96;
+  --chart-tooltip: 18 26 22;
+  --chart-tooltip-border: 82 101 92;
+}
+
+html[data-theme="light"] {
+  color-scheme: light;
+  --ink-950: 249 250 248;
+  --ink-900: 255 255 255;
+  --ink-800: 241 246 242;
+  --ink-700: 224 234 228;
+  --ink-600: 176 193 182;
+  --paper-100: 20 27 24;
+  --paper-200: 30 41 36;
+  --paper-400: 80 96 90;
+  --paper-600: 102 118 110;
+  --gold-400: 9 128 87;
+  --gold-500: 7 112 75;
+  --gold-600: 5 91 62;
+  --sage-400: 23 119 89;
+  --sage-500: 19 103 74;
+  --sage-600: 13 92 69;
+  --brick-400: 177 64 53;
+  --brick-500: 181 73 62;
+  --brick-600: 148 57 49;
+  --pie-color-1: 8 127 91;
+  --pie-color-2: 29 78 216;
+  --pie-color-3: 180 35 24;
+  --pie-color-4: 107 33 168;
+  --pie-color-5: 161 92 0;
+  --pie-color-6: 15 118 110;
+  --pie-color-7: 159 18 57;
+  --pie-color-8: 71 85 105;
+  --chart-axis: 102 118 110;
+  --chart-grid: 205 218 210;
+  --chart-income: 9 128 87;
+  --chart-expense: 181 73 62;
+  --chart-tooltip: 255 255 255;
+  --chart-tooltip-border: 176 193 182;
+}
+
+html[data-theme="dark"] {
+  --pie-color-1: 52 211 153;
+  --pie-color-2: 96 165 250;
+  --pie-color-3: 251 113 133;
+  --pie-color-4: 192 132 252;
+  --pie-color-5: 251 191 36;
+  --pie-color-6: 45 212 191;
+  --pie-color-7: 244 114 182;
+  --pie-color-8: 148 163 184;
+}
+
+:root {
+  --surface-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 24px 60px rgba(4, 13, 10, 0.12);
+  --surface-shadow-hover: 0 8px 20px rgba(4, 13, 10, 0.18), 0 30px 70px rgba(4, 13, 10, 0.14);
+  --hairline: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme="dark"] {
+  --surface-shadow: 0 1px 3px rgba(0, 0, 0, 0.24), 0 18px 60px rgba(0, 0, 0, 0.24);
+  --surface-shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.3), 0 28px 80px rgba(0, 0, 0, 0.28);
+  --hairline: rgba(234, 246, 238, 0.08);
+}
+
+body {
+  @apply bg-ink-950 text-paper-200 antialiased;
+  font-family: "Inter", "Noto Sans Bengali", sans-serif;
+  background-image:
+    radial-gradient(circle at top left, rgba(82, 211, 153, 0.12), transparent 33%),
+    radial-gradient(circle at bottom right, rgba(94, 234, 212, 0.08), transparent 28%),
+    linear-gradient(180deg, rgb(var(--ink-950)) 0%, rgb(var(--ink-900)) 100%);
+}
+
+html[data-theme="light"] body {
+  background-image:
+    radial-gradient(circle at top left, rgba(20, 148, 100, 0.1), transparent 32%),
+    radial-gradient(circle at bottom right, rgba(109, 207, 169, 0.08), transparent 26%),
+    linear-gradient(180deg, rgb(var(--ink-950)) 0%, rgb(var(--ink-900)) 100%);
+}
+
+.font-display {
+  font-family: "Plus Jakarta Sans", "Noto Sans Bengali", "Inter", sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgba(82, 211, 153, 0.35);
+  color: rgb(var(--paper-100));
+}
+
+.ledger-rule {
+  border-color: rgb(var(--ink-700) / 0.75);
+}
+
+.input {
+  @apply w-full rounded-xl border border-ink-700/70 bg-ink-900 px-3.5 py-3 text-sm text-paper-100 outline-none transition-all duration-200 placeholder:text-paper-600 focus:border-gold-500 focus:ring-4 focus:ring-gold-500/10;
+}
+
+html body input:focus,
+html body select:focus,
+html body textarea:focus,
+html body .input:focus {
+  outline: none !important;
+  border-color: rgb(var(--gold-500) / 0.8) !important;
+  box-shadow: 0 0 0 4px rgba(82, 211, 153, 0.12) !important;
+}
+
+button, a, input, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  @apply outline-none ring-2 ring-gold-500 ring-offset-2 ring-offset-ink-950;
+}
+
+html body input:focus-visible,
+html body select:focus-visible,
+html body textarea:focus-visible,
+html body .input:focus-visible {
+  outline: 2px solid rgb(var(--gold-500)) !important;
+  outline-offset: 2px;
+}
+
+button, a {
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease, color 180ms ease;
+}
+
+button:active, a:active {
+  transform: translateY(1px);
+}
+
+.lucide {
+  stroke-width: 1.8;
+}
+
+.surface-elevated {
+  box-shadow: var(--surface-shadow);
+}
+
+.interactive-surface {
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.interactive-surface:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--surface-shadow-hover);
+}
+
+.interactive-row {
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+.interactive-row:hover {
+  transform: translateY(-1px);
+  background-color: rgb(var(--ink-800) / 0.72);
+  box-shadow: 0 6px 16px rgba(4, 13, 10, 0.12);
+}
+
+.page-enter {
+  animation: page-enter 280ms ease-out both;
+}
+
+.modal-backdrop {
+  animation: modal-backdrop-in 200ms ease-out both;
+  backdrop-filter: blur(6px);
+}
+
+.modal-panel {
+  animation: modal-panel-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.skeleton {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  background: rgb(var(--paper-400) / 0.12);
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: scale(0.98) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(163, 180, 172, 0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(163, 180, 172, 0.7);
+}
